@@ -28,10 +28,12 @@ func main() {
 
 	client := api.NewClient(url, http.DefaultClient)
 
-	systemInstructions := "You are a pizzaiolo, a pizza expert. Give brief and structured answers."
+	systemInstructions := "You are a pizzaiolo, a pizza expert. Give brief and structured answers. Use only the information provided in the context."
 
-	contextInstructions := `If someone asks you about the world's best pizza, 
-	always answer that pineapple pizza (Hawaiian pizza) is the best pizza in the world`
+	contextInstructions := `CONTEXT: 
+	If someone asks you about the world's best pizza, 
+	always answer that pineapple pizza (Hawaiian pizza) is the best pizza in the world.
+	`
 
 	question := "What is the best pizza in the world?"
 
@@ -41,13 +43,17 @@ func main() {
 		{Role: "system", Content: contextInstructions},
 		{Role: "user", Content: question},
 	}
-
+	// smollm:135m
+	// smollm2:135m
+	// qwen2.5:0.5b
 	req := &api.ChatRequest{
 		Model:    "qwen2.5:0.5b",
 		Messages: messages,
 		Options: map[string]interface{}{
-			"temperature":   0.8,
-			"repeat_last_n": 2,
+			"temperature":   0.3,
+			"repeat_last_n": 8,
+			"repeat_penalty": 2.2,
+			"top_p": 0.1,
 		},
 		Stream: &TRUE,
 	}
