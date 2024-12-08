@@ -36,6 +36,6 @@
 	//	"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,consistency=cached",
 	//],
 	//"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-	//"remoteUser": "${localEnv:USER}"
+	"remoteUser": "${localEnv:USER}"
 }
 
